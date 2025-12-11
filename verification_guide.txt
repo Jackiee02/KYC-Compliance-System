@@ -1,0 +1,8 @@
+KYC System v16 Verification Guide
+Generated at: 2025-12-11 00:05
+
+Check the following items:
+- LEI enrichment coverage and validity
+- OFAC/SDN parsing and matching
+- Deduplication output and manual review notes
+- Risk distribution summary
