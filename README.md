@@ -61,10 +61,8 @@ This is a comprehensive **KYC (Know Your Customer) Compliance System** designed 
 
 ### 在 Google Colab 中運行 | Running in Google Colab
 
-最簡單的方式是直接在 Google Colab 中打開並執行 `kyc_project.py`：
+打開並執行 `kyc_projecty`：
 
 ```bash
-# 在 Colab 單元格中執行
-!git clone https://github.com/yourusername/kyc-compliance-system.git
-%cd kyc-compliance-system
+# 在 Jupyter notebook 單元格中執行
 !python kyc_project.py
