@@ -1,147 +1,70 @@
-# Sentiment Analysis with BiLSTM and Transformer
+# KYC 合規系統 (香港版) - KYC Compliance System (Hong Kong Edition)
 
-This is a sentiment analysis project implemented using Bidirectional Long Short-Term Memory (BiLSTM) networks and a BERT-based Transformer model. The project provides features for data preprocessing, model training, evaluation, and a web interface for real-time sentiment prediction, making it suitable for processing text data and analyzing its sentiment tendencies.
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-production--ready-brightgreen)
 
----
+## 專案概述 | Project Overview
 
-Youtube Link: https://youtu.be/J8GCeezHulU
+這是一個完整的 **KYC (Know Your Customer) 合規系統**，專為香港金融機構設計，用於自動化客戶盡職調查流程。系統模擬了從資料生成、清洗、合規檢查到報告輸出的全流程，滿足監管合規要求。
 
-## Project Overview
-
-This project aims to perform sentiment classification on text using deep learning techniques, supporting the following features:
-
-- **Data Preprocessing**: Cleans text, tokenizes it, builds a vocabulary, and generates model inputs.
-- **Model Training**: Supports training of BiLSTM and Transformer models, including hyperparameter tuning experiments.
-- **Model Evaluation**: Evaluates model performance and visualizes prediction results.
-- **Web Application**: Provides a real-time sentiment analysis web interface via Flask.
-- **Data Visualization**: Generates charts for sentiment distribution, platform distribution, sentiment trends, and more.
+This is a comprehensive **KYC (Know Your Customer) Compliance System** designed for Hong Kong financial institutions, automating the customer due diligence process. The system simulates the complete workflow from data generation, cleaning, compliance checks to report generation, meeting regulatory compliance requirements.
 
 ---
 
-## Installation Guide
+## 主要功能 | Key Features
 
-Follow these steps to install the project dependencies and set up the environment:
+### 1. **資料生成模組 | Data Generation Module**
+- 生成模擬的客戶資料（可設定規模，預設15,000筆）
+- 包含真實知名公司（匯豐、渣打、騰訊等）
+- 自動注入OFAC制裁名單測試案例
+- 製造2-5%近似重複記錄用於去重測試
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
-   ```
+### 2. **資料清洗與標準化 | Data Cleaning and Standardization**
+- 自動清理公司名稱（特殊字元、標準化後綴）
+- 中英文名稱拆分與正規化
+- 註冊號碼格式標準化
+- 基於司法管轄區的風險分級
 
-2. **Create a Virtual Environment (Recommended)**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-   ```
+### 3. **LEI 增強服務 | LEI Enhancement Service**
+- 整合 GLEIF 全球法人識別碼 API
+- 自動查詢並補充缺失的 LEI
+- ISO 17442 標準格式驗證
+- 快取機制提升查詢效率
 
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 4. **制裁名單篩查 | Sanctions List Screening**
+- 自動下載 OFAC SDN 制裁名單
+- 模糊比對演算法（Jaro-Winkler + Token Sort）
+- 相似度門檻與置信度計算
+- 中英文名稱轉換比對
 
-   Ensure the following essential Python packages are installed:
-   - `torch`
-   - `transformers`
-   - `pandas`
-   - `scikit-learn`
-   - `matplotlib`
-   - `seaborn`
-   - `flask`
-   - `wordcloud`
+### 5. **智能風險評估 | Intelligent Risk Assessment**
+- 多因子風險評分系統
+- 風險等級分類：🔴極高、🟠高、🟡中、🟢低
+- 自定義風險權重配置
 
-   If `requirements.txt` is not available, install the packages manually:
-   ```bash
-   pip install torch transformers pandas scikit-learn matplotlib seaborn flask wordcloud
-   ```
+### 6. **先進去重系統 | Advanced Deduplication System**
+- MinHash LSH 近似重複檢測
+- 動態權重調整（基於風險狀況）
+- 保留高風險記錄策略
+- 輸出測試去重清單
 
-4. **Prepare the Dataset**:
-   - Place the `sentiment_analysis.csv` file in the project root directory, or update the `DATA_PATH` variable in `config.py` to point to your dataset location.
-   - The dataset should contain two columns: `text` (the text content) and `sentiment` (sentiment labels), where labels can be strings (e.g., "positive", "negative", "neutral") or numbers.
+### 7. **多格式報告輸出 | Multi-format Report Generation**
+- **Excel 詳細報告**：客戶風險概覽、高風險清單、制裁命中
+- **PDF 管理摘要**：純英文段落格式，適合管理層審閱
+- **驗證指南**：系統檢查清單
+- **手動審查筆記**：JSON格式的審查建議
 
 ---
 
-## Usage Instructions
+## 安裝指南 | Installation Guide
 
-### Training Models
+### 在 Google Colab 中運行 | Running in Google Colab
 
-Use the `main.py` script to train models with customizable parameters:
-
-- **Train the BiLSTM Model**:
-  ```bash
-  python main.py --mode train --model_type lstm --loss crossentropy --lr 0.001 --batch_size 16 --epochs 10
-  ```
-
-- **Train the Transformer Model**:
-  ```bash
-  python main.py --mode train --model_type transformer --loss crossentropy --lr 0.0001 --batch_size 8 --epochs 5
-  ```
-
-Common Parameter Descriptions:
-- `--mode`: Mode selection (`train` or `experiments`).
-- `--model_type`: Model type (`lstm` or `transformer`).
-- `--loss`: Loss function (BiLSTM supports `crossentropy` and `nllloss`; Transformer supports `crossentropy` and `bce`).
-- `--lr`: Learning rate.
-- `--batch_size`: Batch size.
-- `--epochs`: Number of training epochs.
-
-### Running Experiments
-
-Perform hyperparameter tuning and model selection experiments:
+最簡單的方式是直接在 Google Colab 中打開並執行 `kyc_project.py`：
 
 ```bash
-python main.py --mode experiments
-```
-
-The experiments will test different loss functions, learning rates, and batch sizes, saving the results and best models in the `Results` directory.
-
-### Web Application
-
-Run the sentiment analysis web application:
-
-```bash
-python sentiment_analysis_web.py
-```
-
-After starting, open a browser and visit `http://127.0.0.1:5000`. Enter text to view sentiment predictions from both BiLSTM and Transformer models.
-
-### Data Visualization
-
-Generate visualization charts for the dataset:
-
-```bash
-python plot.py
-```
-
-Charts will be saved in the `plot` directory, including:
-- Sentiment distribution (`sentiment_distribution.png`)
-- Platform distribution (`platform_distribution.png`)
-- Posts per year (`posts_per_year.png`)
-- Sentiment trends (`sentiment_trends.png`)
-- Word clouds (`wordcloud_all.png`, `wordcloud_positive.png`, etc.)
-- Sentiment by platform (`sentiment_by_platform.png`)
-- Heatmaps (`sentiment_platform_heatmap.png`, etc.)
-
----
-
-## Project Structure
-
-Below is an explanation of the main files and directories in the project:
-
-- **`data_loader.py`**: Handles data loading and preprocessing, supporting dataset classes for BiLSTM and Transformer.
-- **`config.py`**: Configuration file defining paths and hyperparameters.
-- **`model.py`**: Defines the BiLSTM and Transformer models.
-- **`train.py`**: Contains model training functions.
-- **`evaluate.py`**: Includes model evaluation and prediction visualization functions.
-- **`main.py`**: Main script supporting training and experiment modes.
-- **`utils.py`**: Utility functions, such as plotting training curves.
-- **`sentiment_analysis_web.py`**: Flask web application for real-time sentiment prediction.
-- **`plot.py`**: Generates data visualization charts.
-- **`sentiment_analysis.csv`**: Dataset file (to be provided by the user, not included in the repository).
-- **`Results/`**: Directory for saving experiment results and final models.
-- **`plot/`**: Directory for saving data visualization charts.
-
----
-
-## License
-
-This project is licensed under the MIT License.
+# 在 Colab 單元格中執行
+!git clone https://github.com/yourusername/kyc-compliance-system.git
+%cd kyc-compliance-system
+!python kyc_project.py
