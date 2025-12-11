@@ -1,86 +1,70 @@
-Overview
-This Jupyter Notebook (KYC_project.ipynb) implements a prototype KYC (Know Your Customer) compliance system in Python. It automates the processing of customer data for financial institutions, focusing on data generation, cleaning, enrichment, sanctions screening, risk assessment, deduplication, and reporting. The system helps identify risks such as sanctions violations, high-risk jurisdictions, and overdue KYC reviews, ensuring compliance with regulations like anti-money laundering (AML) and counter-terrorism financing (CTF).
-Key features:
+# KYC 合規系統 (香港版) - KYC Compliance System (Hong Kong Edition)
 
-Generates realistic test data using Faker.
-Integrates external APIs (GLEIF for LEI enrichment) and resources (OFAC SDN list for sanctions screening).
-Performs fuzzy matching for deduplication using MinHash and LSH.
-Calculates risk scores and categorizes entities (low, medium, high, extreme risk).
-Outputs reports in CSV, Excel, PDF, and JSON formats.
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-production--ready-brightgreen)
 
-This is a testing-oriented prototype; in production, replace generated data with real datasets.
-Dependencies
+## 專案概述 | Project Overview
 
-Python 3.12+ (tested in Google Colab).
-Required libraries (install via pip if not in Colab):textpip install pandas requests faker tqdm datasketch reportlab openpyxl
-Environment: Uses Google Drive for output storage (mount via drive.mount('/content/drive')).
-No additional installations needed for core functionality, but ensure internet access for APIs.
+這是一個完整的 **KYC (Know Your Customer) 合規系統**，專為香港金融機構設計，用於自動化客戶盡職調查流程。系統模擬了從資料生成、清洗、合規檢查到報告輸出的全流程，滿足監管合規要求。
 
-Setup and Usage
+This is a comprehensive **KYC (Know Your Customer) Compliance System** designed for Hong Kong financial institutions, automating the customer due diligence process. The system simulates the complete workflow from data generation, cleaning, compliance checks to report generation, meeting regulatory compliance requirements.
 
-Clone the Repository:textgit clone https://github.com/yourusername/kyc-compliance-system.git
-cd kyc-compliance-system
-Run in Jupyter/Colab:
-Open KYC_project.ipynb in Jupyter Notebook or Google Colab.
-Mount Google Drive if using Colab:Pythonfrom google.colab import drive
-drive.mount('/content/drive')
-Execute cells sequentially. The script will:
-Generate ~15,670 test records.
-Process data through 8 steps.
-Output files to /content/drive/MyDrive/Colab Notebooks/KYC/ (configurable).
+---
 
+## 主要功能 | Key Features
 
-Configuration:
-Edit the Config class for custom settings (e.g., TOTAL_RECORDS, risk weights, output paths).
-For real data: Replace generate_realistic_dataset() with pd.read_csv('your_data.csv').
+### 1. **資料生成模組 | Data Generation Module**
+- 生成模擬的客戶資料（可設定規模，預設15,000筆）
+- 包含真實知名公司（匯豐、渣打、騰訊等）
+- 自動注入OFAC制裁名單測試案例
+- 製造2-5%近似重複記錄用於去重測試
 
-Execution Time:
-GLEIF queries: ~4 hours (due to API delays).
-OFAC screening: ~2.5 hours.
-Total: 6-7 hours for full run on test data.
+### 2. **資料清洗與標準化 | Data Cleaning and Standardization**
+- 自動清理公司名稱（特殊字元、標準化後綴）
+- 中英文名稱拆分與正規化
+- 註冊號碼格式標準化
+- 基於司法管轄區的風險分級
 
+### 3. **LEI 增強服務 | LEI Enhancement Service**
+- 整合 GLEIF 全球法人識別碼 API
+- 自動查詢並補充缺失的 LEI
+- ISO 17442 標準格式驗證
+- 快取機制提升查詢效率
 
-System Workflow
-The pipeline consists of 8 steps:
+### 4. **制裁名單篩查 | Sanctions List Screening**
+- 自動下載 OFAC SDN 制裁名單
+- 模糊比對演算法（Jaro-Winkler + Token Sort）
+- 相似度門檻與置信度計算
+- 中英文名稱轉換比對
 
-Data Generation: Creates fake KYC records (company names, registration numbers, countries, etc.).
-Cleaning & Standardization: Normalizes names, splits bilingual entries, calculates initial risk tiers.
-LEI Enrichment: Queries GLEIF API to fetch/validate Legal Entity Identifiers (LEIs).
-OFAC Screening: Checks against US Treasury's SDN list for sanctions hits using fuzzy matching.
-Risk Assessment: Computes composite risk scores (0-100) based on factors like jurisdiction, sanctions, and KYC status.
-Deduplication: Removes exact and fuzzy duplicates with dynamic weights (using MinHash LSH).
-Reporting: Generates Excel (overview, high-risk, sanctions), PDF (English summary), and verification guide.
-Validation: Lists output files and prints summary stats (e.g., LEI coverage, OFAC hits).
+### 5. **智能風險評估 | Intelligent Risk Assessment**
+- 多因子風險評分系統
+- 風險等級分類：🔴極高、🟠高、🟡中、🟢低
+- 自定義風險權重配置
 
-Output Files:
+### 6. **先進去重系統 | Advanced Deduplication System**
+- MinHash LSH 近似重複檢測
+- 動態權重調整（基於風險狀況）
+- 保留高風險記錄策略
+- 輸出測試去重清單
 
-kyc_raw_data.csv: Generated raw data.
-kyc_cleaned_data.csv: Cleaned dataset.
-kyc_lei_enhanced_data.csv: With enriched LEIs.
-kyc_deduplicated_data.csv: Deduplicated final data.
-KYC合規報告_詳細版.xlsx: Detailed Excel report.
-KYC_Compliance_Summary_Report.pdf: English PDF summary.
-manual_review_notes.json: Duplicates for manual review.
-test_environment_duplicates.csv: Test dedup logs.
-verification_guide.txt: Validation checklist.
-sdn.csv: Cached OFAC list (if downloaded).
+### 7. **多格式報告輸出 | Multi-format Report Generation**
+- **Excel 詳細報告**：客戶風險概覽、高風險清單、制裁命中
+- **PDF 管理摘要**：純英文段落格式，適合管理層審閱
+- **驗證指南**：系統檢查清單
+- **手動審查筆記**：JSON格式的審查建議
 
-Example Output Summary
-After running:
+---
 
-Processed records: ~13,928 (after dedup).
-LEI coverage: ~8.62% validated.
-OFAC hits: ~0.625%.
-KYC overdue: ~10.5%.
+## 安裝指南 | Installation Guide
 
-Limitations
+### 在 Google Colab 中運行 | Running in Google Colab
 
-Test data is synthetic; adapt for production.
-API rate limits may cause delays/errors (handled with retries).
-No machine learning models; risk scoring is rule-based.
-Compliance: Ensure legal review for real-world use (e.g., GDPR compliance).
+最簡單的方式是直接在 Google Colab 中打開並執行 `kyc_project.py`：
 
-Contributing
-Fork the repo, make changes, and submit a pull request. Issues and suggestions welcome!
-License
-MIT License. See LICENSE for details.
+```bash
+# 在 Colab 單元格中執行
+!git clone https://github.com/yourusername/kyc-compliance-system.git
+%cd kyc-compliance-system
+!python kyc_project.py
