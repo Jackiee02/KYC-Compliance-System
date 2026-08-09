@@ -1,0 +1,67 @@
+record_id,entity_type,legal_name,aliases,registered_country,registration_number,lei,last_kyc_review,aum_usd_millions,is_pep,source
+S01,legal_entity,Orion Meridian Trading Limited,,XZ,S-001,,2026-01-01,12,false,benchmark-v1
+S02,legal_entity,Orion Meridian Trade Ltd,,XZ,S-002,,2026-01-01,12,false,benchmark-v1
+S03,legal_entity,猎户子午贸易有限公司,,XZ,S-003,,2026-01-01,12,false,benchmark-v1
+S04,legal_entity,Northstar Petrochemical Corporation,,XZ,S-004,,2026-01-01,22,false,benchmark-v1
+S05,legal_entity,North Star Petrochem Corp,,XZ,S-005,,2026-01-01,22,false,benchmark-v1
+S06,legal_entity,北辰石化集团,,XZ,S-006,,2026-01-01,22,false,benchmark-v1
+S07,individual,Marina Vostokova,,XZ,S-007,,2026-01-01,1,false,benchmark-v1
+S08,individual,Vostokova Marina,,XZ,S-008,,2026-01-01,1,false,benchmark-v1
+S09,individual,玛丽娜沃斯托科娃,,XZ,S-009,,2026-01-01,1,false,benchmark-v1
+S10,legal_entity,Silver Harbour Logistics Co Ltd,,XZ,S-010,,2026-01-01,31,false,benchmark-v1
+S11,legal_entity,Silver Harbor Logistics,,XZ,S-011,,2026-01-01,31,false,benchmark-v1
+S12,legal_entity,银港物流有限公司,,XZ,S-012,,2026-01-01,31,false,benchmark-v1
+S13,legal_entity,Atlas Frontier Bank,,XZ,S-013,,2026-01-01,80,false,benchmark-v1
+S14,legal_entity,AFB International,,XZ,S-014,,2026-01-01,80,false,benchmark-v1
+S15,legal_entity,阿特拉斯边疆银行,,XZ,S-015,,2026-01-01,80,false,benchmark-v1
+S16,legal_entity,Golden Crescent Resources LLC,,XZ,S-016,,2026-01-01,18,false,benchmark-v1
+S17,legal_entity,Golden Crescent Resource,,XZ,S-017,,2026-01-01,18,false,benchmark-v1
+S18,legal_entity,金新月资源,,XZ,S-018,,2026-01-01,18,false,benchmark-v1
+S19,legal_entity,Redwood Strategic Technologies PLC,,XZ,S-019,,2026-01-01,40,false,benchmark-v1
+S20,legal_entity,Redwood Strategy Tech,,XZ,S-020,,2026-01-01,40,false,benchmark-v1
+S21,legal_entity,红杉战略科技,,XZ,S-021,,2026-01-01,40,false,benchmark-v1
+S22,legal_entity,Blue Delta Maritime Holdings,,XZ,S-022,,2026-01-01,55,false,benchmark-v1
+S23,legal_entity,Blue Delta Shipping,,XZ,S-023,,2026-01-01,55,false,benchmark-v1
+S24,legal_entity,蓝色三角洲海运,,XZ,S-024,,2026-01-01,55,false,benchmark-v1
+S25,legal_entity,Orion Meridian Consulting Limited,,HK,S-025,,2026-01-01,5,false,benchmark-v1
+S26,legal_entity,Northstar Consumer Products Limited,,SG,S-026,,2026-01-01,5,false,benchmark-v1
+S27,individual,Marina Vostok,,GB,S-027,,2026-01-01,1,false,benchmark-v1
+S28,legal_entity,Silver Harbour Hotel Limited,,HK,S-028,,2026-01-01,8,false,benchmark-v1
+S29,legal_entity,Atlas Frontier Capital Limited,,US,S-029,,2026-01-01,15,false,benchmark-v1
+S30,legal_entity,Golden Crescent Restaurant Limited,,AE,S-030,,2026-01-01,3,false,benchmark-v1
+S31,legal_entity,Redwood Digital Studio Limited,,CA,S-031,,2026-01-01,4,false,benchmark-v1
+S32,legal_entity,Blue Delta Airlines Limited,,AU,S-032,,2026-01-01,20,false,benchmark-v1
+S33,legal_entity,Nadir International School Limited,,GB,S-033,,2026-01-01,7,false,benchmark-v1
+S34,legal_entity,Eastern Gate Supermarket Limited,,SG,S-034,,2026-01-01,9,false,benchmark-v1
+S35,legal_entity,Sunny Flowers Limited,,HK,S-035,,2026-01-01,2,false,benchmark-v1
+S36,legal_entity,Quantum Orchard Labs Limited,,SG,S-036,,2026-01-01,6,false,benchmark-v1
+S37,legal_entity,海风文化传媒有限公司,,CN,S-037,,2026-01-01,3,false,benchmark-v1
+S38,individual,Daniel Wong,,HK,S-038,,2026-01-01,1,false,benchmark-v1
+S39,legal_entity,Cedar Field Education Limited,,CA,S-039,,2026-01-01,12,false,benchmark-v1
+S40,legal_entity,Mosaic Harbour Arts Limited,,GB,S-040,,2026-01-01,4,false,benchmark-v1
+R01,legal_entity,Harbour Standard Services Limited,,HK,R-001,,2026-01-15,20,false,benchmark-v1
+R02,individual,Alexis Chan,,HK,R-002,,2026-01-01,1,true,benchmark-v1
+R03,legal_entity,Cayman Horizon Holdings Limited,,KY,R-003,,2020-01-01,20,false,benchmark-v1
+R04,individual,Taylor Lin,,HK,R-004,,,1,true,benchmark-v1
+R05,legal_entity,Grand Exposure Partners Limited,,HK,R-005,,2020-01-01,700,true,benchmark-v1
+R06,legal_entity,Orion Meridian Trading Limited,,XZ,R-006,,2026-07-01,20,false,benchmark-v1
+R07,legal_entity,Orion Meridian Trade Ltd,,XZ,R-007,,,20,false,benchmark-v1
+R08,legal_entity,Island Executive Assets Limited,,KY,R-008,,2026-07-01,800,true,benchmark-v1
+R09,individual,Jordan Lee,,SG,R-009,,2026-06-01,1,false,benchmark-v1
+R10,individual,Virgin Executive One,,VG,R-010,,,1,true,benchmark-v1
+D01,legal_entity,Harbour View Consulting Limited,,HK,HK-1001,,2026-01-01,10,false,benchmark-v1
+D02,legal_entity,Harbor View Consulting Ltd,,HK,HK1001,,2026-01-01,10,false,benchmark-v1
+D03,legal_entity,Jade River Capital Partners Limited,,SG,REG-2002,,2026-01-01,10,false,benchmark-v1
+D04,legal_entity,Jade River Capital Partner Ltd,,SG,REG2002,,2026-01-01,10,false,benchmark-v1
+D05,legal_entity,陈氏环球贸易有限公司,,HK,CN-3003,,2026-01-01,10,false,benchmark-v1
+D06,legal_entity,陳氏環球貿易有限公司,,HK,CN3003,,2026-01-01,10,false,benchmark-v1
+D07,legal_entity,Everlight Medical Devices Corporation,,CN,EV-4004,,2026-01-01,10,false,benchmark-v1
+D08,legal_entity,Ever Light Medical Device Corp,,CN,EV4004,,2026-01-01,10,false,benchmark-v1
+D09,legal_entity,Summit Peak Advisory LLC,,US,SP-5005,,2026-01-01,10,false,benchmark-v1
+D10,legal_entity,Summit Peaks Advisory Limited,,US,SP5005,,2026-01-01,10,false,benchmark-v1
+D11,legal_entity,Oceanic Foods Group,,AU,OC-6006,,2026-01-01,10,false,benchmark-v1
+D12,legal_entity,Oceanic Food Group Limited,,AU,OC6006,,2026-01-01,10,false,benchmark-v1
+D13,legal_entity,Pineapple Studio Limited,,HK,U-7001,,2026-01-01,10,false,benchmark-v1
+D14,legal_entity,Quantum Orchard Labs,,SG,U-7002,,2026-01-01,10,false,benchmark-v1
+D15,legal_entity,Mosaic Harbour Arts,,GB,U-7003,,2026-01-01,10,false,benchmark-v1
+D16,legal_entity,Cedar Field Education,,CA,U-7004,,2026-01-01,10,false,benchmark-v1

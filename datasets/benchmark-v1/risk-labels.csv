@@ -1,0 +1,11 @@
+record_id,expected_category,scenario
+R01,low,Standard legal entity with recent review
+R02,medium,PEP individual with recent review
+R03,medium,Elevated jurisdiction and overdue review
+R04,medium,PEP individual with missing review
+R05,high,PEP large exposure and overdue review
+R06,high,Sanctions candidate with recent review
+R07,critical,Sanctions candidate with missing review
+R08,high,PEP elevated jurisdiction and large exposure
+R09,low,Standard individual with recent review
+R10,high,PEP elevated jurisdiction and missing review
