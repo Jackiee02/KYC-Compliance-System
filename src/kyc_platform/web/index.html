@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="ClearTrace KYC 客户尽调与制裁筛查工作台" />
+    <title>ClearTrace · KYC 工作台</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/app.css" />
+    <script defer src="/static/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="主导航">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+            <path d="M7 12.5 22 4l15 8.5v19L22 40 7 31.5z" />
+            <path d="m13 22 6 6 12-13" />
+          </svg>
+          <div>
+            <strong>ClearTrace</strong>
+            <span>客户尽调台</span>
+          </div>
+        </div>
+
+        <nav class="primary-nav">
+          <button class="nav-item is-active" type="button" data-view="overview" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">⌁</span><span>今日总览</span>
+          </button>
+          <button class="nav-item" type="button" data-view="customers">
+            <span class="nav-icon" aria-hidden="true">◎</span><span>客户台账</span>
+          </button>
+          <button class="nav-item" type="button" data-view="reviews">
+            <span class="nav-icon" aria-hidden="true">◇</span><span>案件复核</span>
+            <span class="nav-count" id="navCaseCount">0</span>
+          </button>
+          <button class="nav-item" type="button" data-view="batches">
+            <span class="nav-icon" aria-hidden="true">⇅</span><span>批次报告</span>
+          </button>
+          <button class="nav-item" type="button" data-view="evaluation">
+            <span class="nav-icon" aria-hidden="true">∿</span><span>质量评估</span>
+          </button>
+          <a class="nav-item" href="/docs" target="_blank" rel="noreferrer">
+            <span class="nav-icon" aria-hidden="true">↗</span><span>接口文档</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="mode-indicator">
+            <span class="mode-dot"></span>
+            <div><strong id="modeLabel">正在连接</strong><small id="datasetLabel">检查数据源…</small></div>
+          </div>
+          <p>决策支持系统<br />最终判断需人工复核</p>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <button class="icon-button menu-button" id="menuButton" type="button" aria-label="打开导航">☰</button>
+          <div class="breadcrumb"><span>合规运营</span><b>/</b><strong id="currentViewLabel">今日总览</strong></div>
+          <div class="operator"><span class="operator-avatar">林</span><div><strong>合规分析员</strong><small>工作席位 01</small></div></div>
+        </header>
+
+        <main id="mainContent" tabindex="-1">
+          <section class="view is-visible" id="view-overview" data-title="今日总览">
+            <div class="page-heading">
+              <div><p class="eyebrow">OPERATIONS / 业务态势</p><h1>先处理需要判断的事。</h1><p>客户资料、名单命中与风险信号汇总在同一条证据链上。</p></div>
+              <div class="heading-actions">
+                <button class="button button-secondary" type="button" data-action="refresh">刷新数据</button>
+                <button class="button button-primary" type="button" data-open-customer>登记客户</button>
+              </div>
+            </div>
+
+            <section class="pulse-rail" aria-labelledby="pulseTitle">
+              <div class="pulse-copy"><span>案件脉冲轨</span><h2 id="pulseTitle">从资料进入，到人工决定</h2></div>
+              <ol>
+                <li class="is-complete"><span>01</span><div><strong>客户资料</strong><small id="pulseCustomers">0 个主体</small></div></li>
+                <li class="is-complete"><span>02</span><div><strong>名单筛查</strong><small id="pulseScreening">数据源就绪</small></div></li>
+                <li class="is-complete"><span>03</span><div><strong>风险评分</strong><small id="pulsePolicy">策略加载中</small></div></li>
+                <li class="is-current"><span>04</span><div><strong>人工复核</strong><small id="pulseCases">0 件待处理</small></div></li>
+              </ol>
+            </section>
+
+            <div class="overview-grid">
+              <section class="priority-panel">
+                <div class="panel-label"><span class="signal-dot"></span>当前优先事项</div>
+                <div class="priority-number" id="openCaseCount">0</div>
+                <h2>件名单结果等待判断</h2>
+                <p>先看名称相似度、名单项目和客户背景，再记录复核结论。</p>
+                <button class="text-button" type="button" data-view-target="reviews">进入复核队列 <span>→</span></button>
+                <div class="priority-grid">
+                  <div><span>升级调查</span><strong id="escalatedCaseCount">0</strong></div>
+                  <div><span>PEP 客户</span><strong id="pepCount">0</strong></div>
+                </div>
+              </section>
+
+              <section class="metric-ledger" aria-label="业务指标">
+                <div class="ledger-head"><div><span>台账快照</span><strong>截至此刻</strong></div><span class="live-tag">LIVE</span></div>
+                <dl>
+                  <div><dt>客户主体</dt><dd id="customerCount">0</dd><small>已登记记录</small></div>
+                  <div><dt>活动案件</dt><dd id="activeCaseCount">0</dd><small>待复核及已升级</small></div>
+                  <div><dt>审计事件</dt><dd id="auditCount">0</dd><small>可追溯操作</small></div>
+                </dl>
+              </section>
+            </div>
+
+            <div class="split-grid">
+              <section class="surface queue-preview">
+                <div class="section-head"><div><p class="eyebrow">REVIEW QUEUE</p><h2>最新待复核</h2></div><button class="quiet-button" type="button" data-view-target="reviews">查看全部</button></div>
+                <div id="overviewCases" class="case-list compact"><div class="empty-state"><span>◇</span><strong>没有待复核案件</strong><p>完成客户评估后，名单匹配会出现在这里。</p></div></div>
+              </section>
+
+              <section class="surface quick-screen">
+                <div class="section-head"><div><p class="eyebrow">QUICK CHECK</p><h2>快速名称筛查</h2></div><span class="utility-label">不写入客户台账</span></div>
+                <form id="quickScreenForm" class="stack-form">
+                  <label><span>客户或机构名称</span><input name="legal_name" required placeholder="例如：Central Bank of Iran" autocomplete="organization" /></label>
+                  <div class="form-row"><label><span>注册国家 / 地区</span><input name="country" maxlength="2" placeholder="HK" /></label><label class="check-field"><input name="is_pep" type="checkbox" /><span>属于 PEP</span></label></div>
+                  <button class="button button-ink" type="submit">立即筛查</button>
+                </form>
+                <div class="screen-result" id="quickScreenResult" hidden></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="view" id="view-customers" data-title="客户台账">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">CUSTOMER LEDGER / 客户资料</p><h1>客户台账</h1><p>登记主体资料，并发起名单筛查与风险评估。</p></div><button class="button button-primary" type="button" data-open-customer>登记新客户</button></div>
+            <section class="surface table-surface">
+              <div class="toolbar">
+                <label class="search-field"><span class="sr-only">搜索客户</span><span aria-hidden="true">⌕</span><input id="customerSearch" placeholder="搜索名称、客户编号或注册号" /></label>
+                <label><span class="sr-only">国家筛选</span><input id="countryFilter" maxlength="2" placeholder="国家，如 HK" /></label>
+                <label><span class="sr-only">PEP 筛选</span><select id="pepFilter"><option value="">全部客户</option><option value="true">仅 PEP</option><option value="false">非 PEP</option></select></label>
+                <button class="button button-secondary" id="customerFilterButton" type="button">查询</button>
+              </div>
+              <div class="table-wrap">
+                <table><thead><tr><th>客户</th><th>国家</th><th>注册编号</th><th>LEI</th><th>特征</th><th><span class="sr-only">操作</span></th></tr></thead><tbody id="customerTableBody"></tbody></table>
+              </div>
+              <div class="empty-state" id="customerEmpty" hidden><span>◎</span><strong>还没有客户</strong><p>登记第一个客户，开始建立尽调台账。</p><button class="text-button" type="button" data-open-customer>登记客户 →</button></div>
+            </section>
+          </section>
+
+          <section class="view" id="view-reviews" data-title="案件复核">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">CASE REVIEW / 人工判断</p><h1>案件复核</h1><p>自动匹配只提供证据，结论由合规人员记录。</p></div></div>
+            <div class="case-filter" role="group" aria-label="案件状态">
+              <button class="filter-chip is-active" type="button" data-case-filter="open">待复核</button>
+              <button class="filter-chip" type="button" data-case-filter="escalated">已升级</button>
+              <button class="filter-chip" type="button" data-case-filter="closed">已完成</button>
+              <button class="filter-chip" type="button" data-case-filter="">全部</button>
+            </div>
+            <div class="case-list full" id="reviewCaseList"></div>
+          </section>
+
+          <section class="view" id="view-batches" data-title="批次报告">
+            <div class="page-heading compact-heading"><div><p class="eyebrow">BATCH CONTROL / 批量检查</p><h1>批次报告</h1><p>用模拟客户验证完整流水线，并下载可核验的报告产物。</p></div></div>
+            <div class="batch-layout">
+              <section class="surface batch-control">
+                <div class="section-head"><div><p class="eyebrow">NEW RUN</p><h2>发起检查批次</h2></div><span class="utility-label">演示数据</span></div>
+                <form id="pipelineForm" class="stack-form">
+                  <label><span>基础客户数量</span><input name="record_count" type="number" min="1" max="10000" value="50" required /></label>
+                  <div class="form-row"><label><span>重复比例</span><input name="duplicate_rate" type="number" min="0" max="0.5" step="0.01" value="0.03" /></label><label><span>名单注入比例</span><input name="sanctions_injection_rate" type="number" min="0" max="0.5" step="0.01" value="0.02" /></label></div>
+                  <label><span>随机种子</span><input name="seed" type="number" value="2026" /></label>
+                  <button class="button button-ink" type="submit">运行并生成报告</button>
+                  <p class="form-note">批次在当前请求中运行，50条记录通常数秒内完成。</p>
+                </form>
+                <div id="pipelineProgress" class="pipeline-progress" hidden><span></span><strong>正在清洗、筛查和生成报告…</strong></div>
+              </section>
+              <section class="surface run-history">
+                <div class="section-head"><div><p class="eyebrow">EVIDENCE PACKS</p><h2>历史报告包</h2></div><button class="quiet-button" id="refreshRuns" type="button">刷新</button></div>
+                <div id="runList" class="run-list"></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="view" id="view-evaluation" data-title="质量评估">
+            <div class="page-heading compact-heading">
+              <div><p class="eyebrow">QUALITY LAB / 黄金评估</p><h1>不要只证明它能跑。</h1><p>用固定标注集衡量误报、漏报、实体识别与风险分类，而不是挑选几个成功案例。</p></div>
+              <button class="button button-primary" id="runEvaluation" type="button">运行黄金评估</button>
+            </div>
+            <section class="benchmark-banner">
+              <div><span>数据集</span><strong id="benchmarkName">正在读取…</strong><small id="benchmarkVersion">—</small></div>
+              <dl>
+                <div><dt>客户记录</dt><dd id="benchmarkCustomers">—</dd></div>
+                <div><dt>筛查标签</dt><dd id="benchmarkScreeningLabels">—</dd></div>
+                <div><dt>风险标签</dt><dd id="benchmarkRiskLabels">—</dd></div>
+                <div><dt>去重记录</dt><dd id="benchmarkDuplicateLabels">—</dd></div>
+              </dl>
+              <p><span class="mode-dot"></span>100% 合成数据 · 固定标签 · SHA-256 版本指纹</p>
+            </section>
+            <div id="evaluationEmpty" class="surface empty-state evaluation-empty">
+              <span>∿</span><strong>还没有评估结果</strong><p>运行黄金评估后，这里会显示 Precision、Recall、F1、风险准确率和阈值对比。</p>
+            </div>
+            <div id="evaluationResult" hidden>
+              <section class="evaluation-scoreboard">
+                <div class="score-lead"><span>SCREENING F1</span><strong id="evaluationF1">—</strong><small id="evaluationTimestamp">—</small></div>
+                <dl>
+                  <div><dt>Precision</dt><dd id="evaluationPrecision">—</dd><small>警报中正确比例</small></div>
+                  <div><dt>Recall</dt><dd id="evaluationRecall">—</dd><small>应命中案例召回率</small></div>
+                  <div><dt>实体 Recall@K</dt><dd id="evaluationEntityRecall">—</dd><small>正确名单实体进入候选</small></div>
+                  <div><dt>风险准确率</dt><dd id="evaluationRiskAccuracy">—</dd><small>预期风险等级一致</small></div>
+                  <div><dt>去重 F1</dt><dd id="evaluationDuplicateF1">—</dd><small>重复候选综合表现</small></div>
+                </dl>
+              </section>
+              <div class="evaluation-grid">
+                <section class="surface">
+                  <div class="section-head"><div><p class="eyebrow">THRESHOLD CURVE</p><h2>阈值取舍</h2></div><span class="utility-label">越高越严格</span></div>
+                  <div class="table-wrap"><table><thead><tr><th>阈值</th><th>Precision</th><th>Recall</th><th>F1</th><th>误报</th><th>漏报</th></tr></thead><tbody id="thresholdTableBody"></tbody></table></div>
+                </section>
+                <section class="surface">
+                  <div class="section-head"><div><p class="eyebrow">ERROR ANALYSIS</p><h2>错误与证据</h2></div><span class="utility-label" id="evaluationRunId">—</span></div>
+                  <div class="error-ledger">
+                    <div><span>筛查误报</span><strong id="evaluationFalsePositive">—</strong></div>
+                    <div><span>筛查漏报</span><strong id="evaluationFalseNegative">—</strong></div>
+                    <div><span>去重误报</span><strong id="duplicateFalsePositive">—</strong></div>
+                    <div><span>去重漏报</span><strong id="duplicateFalseNegative">—</strong></div>
+                  </div>
+                  <div class="artifact-links evaluation-artifacts" id="evaluationArtifacts"></div>
+                  <p class="evaluation-note">本基准用于工程回归，不代表生产名单筛查有效性。真实上线仍需独立标注、代表性数据和合规审批。</p>
+                </section>
+              </div>
+            </div>
+            <div class="pipeline-progress evaluation-progress" id="evaluationProgress" hidden><span></span><strong>正在执行筛查、风险、去重与阈值扫描…</strong></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <dialog class="dialog" id="customerDialog">
+      <form id="customerForm" method="dialog">
+        <div class="dialog-head"><div><p class="eyebrow">NEW CUSTOMER</p><h2>登记客户</h2></div><button class="dialog-close" type="button" data-close-dialog aria-label="关闭">×</button></div>
+        <div class="dialog-body">
+          <label class="wide"><span>法定名称 *</span><input name="legal_name" required maxlength="500" placeholder="输入公司或个人法定名称" /></label>
+          <label><span>内部客户编号</span><input name="record_id" maxlength="100" placeholder="留空则自动生成" /></label>
+          <label><span>主体类型</span><select name="entity_type"><option value="legal_entity">法人实体</option><option value="individual">个人</option><option value="legal_arrangement">法律安排</option></select></label>
+          <label><span>注册国家 / 地区</span><input name="registered_country" maxlength="2" placeholder="HK" /></label>
+          <label><span>注册编号</span><input name="registration_number" maxlength="100" /></label>
+          <label class="wide"><span>LEI</span><input name="lei" maxlength="20" placeholder="20位法人机构识别编码" /></label>
+          <label><span>最近 KYC 复核</span><input name="last_kyc_review" type="date" /></label>
+          <label><span>风险敞口（百万美元）</span><input name="aum_usd_millions" type="number" min="0" step="0.1" /></label>
+          <label class="check-field wide"><input name="is_pep" type="checkbox" /><span>标记为政治公众人物（PEP）</span></label>
+        </div>
+        <div class="dialog-foot"><button class="button button-secondary" type="button" data-close-dialog>取消</button><button class="button button-primary" type="submit" value="default">保存客户</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="dialog case-dialog" id="caseDialog">
+      <form id="caseDecisionForm" method="dialog">
+        <div class="dialog-head"><div><p class="eyebrow">CASE DECISION</p><h2>记录复核结论</h2></div><button class="dialog-close" type="button" data-close-dialog aria-label="关闭">×</button></div>
+        <div class="case-evidence" id="caseEvidence"></div>
+        <div class="dialog-body single-column"><label><span>复核备注</span><textarea name="notes" rows="4" maxlength="2000" placeholder="记录支持判断的事实、已核验资料或下一步行动"></textarea></label></div>
+        <div class="decision-actions"><button class="button decision-clear" type="submit" value="false_positive">排除误报</button><button class="button decision-escalate" type="submit" value="escalate">升级调查</button><button class="button decision-confirm" type="submit" value="confirmed_match">确认命中</button></div>
+      </form>
+    </dialog>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+    <div class="loading-curtain" id="loadingCurtain" hidden><span class="spinner"></span><strong>正在读取合规台账</strong></div>
+  </body>
+</html>

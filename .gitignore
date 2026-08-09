@@ -1,0 +1,40 @@
+# Local Python environments
+.venv/
+
+# Python/tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Notebook/editor state
+.ipynb_checkpoints/
+.jupyter/
+.vscode/*.local.json
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data and generated artifacts
+data/*
+!data/.gitkeep
+outputs/*
+!outputs/.gitkeep
+*.db
+*.db-shm
+*.db-wal
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# OS noise
+.DS_Store
+Thumbs.db

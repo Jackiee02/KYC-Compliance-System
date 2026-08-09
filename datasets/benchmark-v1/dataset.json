@@ -1,0 +1,17 @@
+{
+  "name": "KYC Synthetic Golden Benchmark",
+  "version": "1.0.0",
+  "created_at": "2026-08-09",
+  "as_of_date": "2026-08-09",
+  "language": ["en", "zh-Hans", "zh-Hant"],
+  "synthetic": true,
+  "risk_policy_version": "2026.08-demo.1",
+  "description": "Versioned synthetic benchmark for sanctions alerting, risk categorization, and entity resolution.",
+  "files": {
+    "customers": "customers.csv",
+    "sanctions": "sanctions-entities.jsonl",
+    "screening_labels": "screening-labels.csv",
+    "risk_labels": "risk-labels.csv",
+    "duplicate_labels": "duplicate-labels.csv"
+  }
+}

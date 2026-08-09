@@ -1,0 +1,17 @@
+record_id,cluster_id,scenario
+D01,DUP-01,English spelling variation
+D02,DUP-01,English spelling variation
+D03,DUP-02,Singular plural legal name variation
+D04,DUP-02,Singular plural legal name variation
+D05,DUP-03,Simplified and traditional Chinese variation
+D06,DUP-03,Simplified and traditional Chinese variation
+D07,DUP-04,Spacing and legal suffix variation
+D08,DUP-04,Spacing and legal suffix variation
+D09,DUP-05,Minor plural variation
+D10,DUP-05,Minor plural variation
+D11,DUP-06,Singular plural variation
+D12,DUP-06,Singular plural variation
+D13,UNIQUE-01,Unique negative control
+D14,UNIQUE-02,Unique negative control
+D15,UNIQUE-03,Unique negative control
+D16,UNIQUE-04,Unique negative control

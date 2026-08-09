@@ -1,0 +1,41 @@
+record_id,expected_entity_id,expected_match,segment,notes
+S01,SYN-001,true,exact_latin,Exact primary name
+S02,SYN-001,true,alias_latin,Exact listed alias
+S03,SYN-001,true,alias_chinese,Simplified Chinese alias
+S04,SYN-002,true,exact_latin,Exact primary name
+S05,SYN-002,true,alias_latin,Exact listed alias
+S06,SYN-002,true,alias_chinese,Simplified Chinese alias
+S07,SYN-003,true,exact_latin,Exact individual name
+S08,SYN-003,true,reordered_name,Reordered individual name alias
+S09,SYN-003,true,alias_chinese,Chinese individual alias
+S10,SYN-004,true,exact_latin,Exact primary name
+S11,SYN-004,true,alias_latin,American spelling alias
+S12,SYN-004,true,alias_chinese,Simplified Chinese alias
+S13,SYN-005,true,exact_latin,Exact primary name
+S14,SYN-005,true,alias_latin,Short trading alias
+S15,SYN-005,true,alias_chinese,Simplified Chinese alias
+S16,SYN-006,true,exact_latin,Exact primary name
+S17,SYN-006,true,alias_latin,Singular noun alias
+S18,SYN-006,true,alias_chinese,Simplified Chinese alias
+S19,SYN-007,true,exact_latin,Exact primary name
+S20,SYN-007,true,alias_latin,Abbreviated alias
+S21,SYN-007,true,alias_chinese,Simplified Chinese alias
+S22,SYN-008,true,exact_latin,Exact primary name
+S23,SYN-008,true,alias_latin,Trading alias
+S24,SYN-008,true,alias_chinese,Simplified Chinese alias
+S25,,false,hard_negative,Shared Orion Meridian tokens but different business
+S26,,false,hard_negative,Shared Northstar token but unrelated business
+S27,,false,hard_negative,Similar personal name but not the listed individual
+S28,,false,hard_negative,Shared Silver Harbour tokens but hotel business
+S29,,false,hard_negative,Shared Atlas Frontier tokens but capital business
+S30,,false,hard_negative,Shared Golden Crescent tokens but restaurant business
+S31,,false,hard_negative,Shared Redwood token but unrelated business
+S32,,false,hard_negative,Shared Blue Delta tokens but airline business
+S33,,false,hard_negative,Shared Nadir International tokens but school business
+S34,,false,hard_negative,Shared Eastern Gate tokens but supermarket business
+S35,,false,easy_negative,Unrelated company
+S36,,false,easy_negative,Unrelated company
+S37,,false,easy_negative,Unrelated Chinese company
+S38,,false,easy_negative,Unrelated individual
+S39,,false,easy_negative,Unrelated company
+S40,,false,easy_negative,Unrelated company
